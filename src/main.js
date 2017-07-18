@@ -13,3 +13,11 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+Vue.filter('two_digits', function (value){
+  if (value.toString().length <= 1) {
+    return '0' + value.toString();
+  } else {
+    return value.toString();
+  }
+})

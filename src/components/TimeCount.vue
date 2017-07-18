@@ -1,6 +1,9 @@
 <template>
-<div>Hello {{ startTime }}
-  {{ now - startTime }}
+<div>
+  Started since :
+  <span>{{ hours | two_digits }}</span>:
+  <span>{{ minutes | two_digits }}</span>:
+  <span>{{ seconds | two_digits }}</span>
 </div>
 </template>
 
@@ -20,11 +23,24 @@ export default {
       now: Math.trunc((new Date()).getTime() / 1000),
     };
   },
+  computed: {
+    seconds: function() {
+      return (this.now - this.startTime) % 60;
+    },
+    minutes: function() {
+      return Math.trunc((this.now - this.startTime) / 60) % 60;
+    },
+    hours: function() {
+      return Math.trunc((this.now - this.startTime) / 60 / 60) % 60;
+    },
+  },
   mounted: function() {
-    console.log('bol', this);
-    window.setInterval(() => {
+    this.interval = window.setInterval(() => {
       this.updateNow();
-    }, 3000);
+    }, 1000);
+  },
+  beforeDestroy: function() {
+    clearInterval(this.interval);
   },
   props: {
     startTime: {
