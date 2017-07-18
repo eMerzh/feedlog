@@ -1,42 +1,64 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <feedlist :items="feedItems" />
+    <template v-if="isStarted">
+        <timecount :startTime="startedTime"></timecount>
+        <button @click="stop()">Stop</button>
+    </template>
+    <template v-else>
+      <button @click="start('left')">Left</button>
+      <button @click="start('right')">Right</button>
+    </template>
+
+
   </div>
 </template>
 
 <script>
+import feedlist from '@/components/feedlist'
+import timecount from '@/components/TimeCount'
+
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      isStarted: false,
+      startedTime: null,
+      selectedSide: 'left',
+      feedItems: [
+        {date: Math.trunc((new Date()).getTime() / 1000), side: 'left'},
+        {date: Math.trunc((new Date()).getTime() / 1000), side: 'left'},
+      ],
     }
+  },
+  methods: {
+    getNow: function() {
+      return Math.trunc((new Date()).getTime() / 1000);
+    },
+
+    start: function(side) {
+      this.isStarted = true;
+      this.selectedSide = side;
+      this.startedTime = this.getNow();
+    },
+
+    stop: function() {
+      this.isStarted = false;
+      this.feedItems.push(
+        {date: this.startedTime, side:this.selectedSide, duration: this.getNow() - this.startedTime}
+      );
+    },
+
+  },
+  components: {
+    feedlist,
+    timecount,
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -47,7 +69,7 @@ li {
   margin: 0 10px;
 }
 
-a {
+button {
   color: #42b983;
 }
 </style>
