@@ -1,14 +1,20 @@
 <template>
   <ul>
-    <li v-for="item in items">
+    <li v-for="item in filteredItems">
       {{ item.side }} => {{ item.date }} ( {{ item.duration }}s)
     </li>
+    <span v-if="filteredItems.length < items.length">More ... </span>
   </ul>
 </template>
 
 <script>
 export default {
   name: 'feedlist',
-  props: ['items']
+  props: ['items'],
+  computed: {
+    filteredItems: function() {
+      return this.items.slice(0, 4);
+    }
+  }
 }
 </script>
