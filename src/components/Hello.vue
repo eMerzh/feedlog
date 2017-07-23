@@ -28,7 +28,7 @@
         <div class="jumbotron">
           <p class="lead">Last feeding</p>
           <h1 class="display-3">
-            <span>{{ hoursAgo | two_digits }}</span>:<span>{{ minutesAgo | two_digits }}</span>
+            <timecount :startTime="latestFeeding.date" :auto-update="60"></timecount>
             <small class="text-muted"> hours ago
               <span class="badge badge-default badge-pill">{{ latestFeeding.side }}</span>
             </small>
@@ -45,7 +45,6 @@ import timecount from '@/components/TimeCount'
 import two_digits from '../filters/two_digits'
 
 export default {
-  name: 'hello',
   data () {
     return {
       isStarted: false,
@@ -78,15 +77,6 @@ export default {
   computed: {
     latestFeeding: function() {
       return this.feedItems[this.feedItems.length - 1];
-    },
-    secondsAgo: function() {
-      return (this.getNow() - this.latestFeeding.date) % 60;
-    },
-    minutesAgo: function() {
-      return Math.trunc((this.getNow() - this.latestFeeding.date) / 60) % 60;
-    },
-    hoursAgo: function() {
-      return Math.trunc((this.getNow() - this.latestFeeding.date) / 60 / 60) % 60;
     },
   },
   components: {
