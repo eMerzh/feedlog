@@ -18,6 +18,16 @@ export default {
     updateNow: function() {
       this.now = this.getNow();
     },
+    update: function() {
+      const period = this.autoUpdate * 1000
+      this.interval = window.setInterval(() => {
+        this.updateNow();
+      }, period);
+    },
+    stopUpdate() {
+      clearInterval(this.interval)
+      this.interval = null
+    }
   },
   data: function() {
     return {
@@ -36,21 +46,35 @@ export default {
     },
   },
   mounted: function() {
-    this.interval = window.setInterval(() => {
-      this.updateNow();
-    }, 1000);
+    if (this.autoUpdate) {
+      this.update();
+    }
   },
   beforeDestroy: function() {
-    clearInterval(this.interval);
+   this.stopUpdate();
   },
   props: {
     startTime: {
       type: Number,
       coerce: str => Math.trunc(Date.parse(str) / 1000)
     },
+    autoUpdate: {
+      type: Number,
+      default: 1,
+    }
   },
   filters: {
     two_digits
-  }
+  },
+  watch: {
+    autoUpdate(newAutoUpdate) {
+      this.stopUpdate()
+      // only update when it's not falsy value
+      // which means you cans set it to 0 to disable auto-update
+      if (newAutoUpdate) {
+        this.update()
+      }
+    }
+  },
 }
 </script>
