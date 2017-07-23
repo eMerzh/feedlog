@@ -1,9 +1,8 @@
 <template>
 <div>
-  Started since :
-  <span>{{ hours | two_digits }}</span>:
-  <span>{{ minutes | two_digits }}</span>:
-  <span>{{ seconds | two_digits }}</span>
+    <span>{{ hours | two_digits }}</span>:
+    <span>{{ minutes | two_digits }}</span>:
+    <span>{{ seconds | two_digits }}</span>
 </div>
 </template>
 
@@ -48,7 +47,7 @@ export default {
     startTime: {
       type: Number,
       coerce: str => Math.trunc(Date.parse(str) / 1000)
-    }
+    },
   },
   filters: {
     two_digits
