@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import two_digits from '../filters/two_digits'
+
 export default {
   name: 'timecount',
   methods: {
@@ -47,6 +49,9 @@ export default {
       type: Number,
       coerce: str => Math.trunc(Date.parse(str) / 1000)
     }
+  },
+  filters: {
+    two_digits
   }
 }
 </script>
