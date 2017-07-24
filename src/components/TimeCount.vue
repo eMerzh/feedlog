@@ -1,13 +1,38 @@
 <template>
-<div>
-    <span>{{ hours | two_digits }}</span>:
-    <span>{{ minutes | two_digits }}</span>:
-    <span>{{ seconds | two_digits }}</span>
-</div>
+  <span>{{ humanizeDuration }}</span>
 </template>
 
 <script>
-import two_digits from '../filters/two_digits'
+/**
+ * Translates seconds into human readable format of seconds, minutes, hours, days, and years
+ *
+ * @param  {number} seconds   The number of seconds to be processed
+ * @param  {number} precision The number of time elements
+ * @return {string}           The phrase describing the the amount of time
+ */
+function forHumans ( seconds, precision) {
+    var levels = [
+        [Math.floor(seconds / 31536000), 'years'],
+        [Math.floor((seconds % 31536000) / 86400), 'days'],
+        [Math.floor(((seconds % 31536000) % 86400) / 3600), 'hours'],
+        [Math.floor((((seconds % 31536000) % 86400) % 3600) / 60), 'minutes'],
+        [(((seconds % 31536000) % 86400) % 3600) % 60, 'seconds'],
+    ];
+    var result = [];
+
+    for (var i = 0, max = levels.length; i < max; i++) {
+      var value = levels[i][0];
+      if ( value === 0 ) continue;
+
+      // take unit from array and remove plural form if value is 1
+      var unit = (value === 1 ? levels[i][1].substr(0, levels[i][1].length-1): levels[i][1]);
+      result.push(` ${value} ${unit}`);
+    };
+    if(precision) {
+      result = result.slice(0, precision);
+    }
+    return result.join(' ');
+}
 
 export default {
   name: 'timecount',
@@ -25,8 +50,8 @@ export default {
       }, period);
     },
     stopUpdate() {
-      clearInterval(this.interval)
-      this.interval = null
+      clearInterval(this.interval);
+      this.interval = null;
     }
   },
   data: function() {
@@ -35,15 +60,9 @@ export default {
     };
   },
   computed: {
-    seconds: function() {
-      return (this.now - this.startTime) % 60;
-    },
-    minutes: function() {
-      return Math.trunc((this.now - this.startTime) / 60) % 60;
-    },
-    hours: function() {
-      return Math.trunc((this.now - this.startTime) / 60 / 60) % 60;
-    },
+    humanizeDuration: function () {
+      return forHumans(this.now - this.startTime, this.precision);
+    }
   },
   mounted: function() {
     if (this.autoUpdate) {
@@ -61,10 +80,11 @@ export default {
     autoUpdate: {
       type: Number,
       default: 1,
-    }
-  },
-  filters: {
-    two_digits
+    },
+    precision:  {
+      type: Number,
+      default: 3,
+    },
   },
   watch: {
     autoUpdate(newAutoUpdate) {

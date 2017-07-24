@@ -10,7 +10,7 @@
           <p class="lead">Started since :</p>
           <h1 class="display-3">
             <timecount :startTime="startedTime"></timecount>
-            <small class="badge badge-default badge-pill">{{ selectedSide }}</small>
+            <small class="badge badge-primary badge-pill">{{ selectedSide }}</small>
           </h1>
         </div>
       </div>
@@ -28,10 +28,9 @@
         <div class="jumbotron">
           <p class="lead">Last feeding</p>
           <h1 class="display-3">
-            <timecount :startTime="latestFeeding.date" :auto-update="60"></timecount>
-            <small class="text-muted"> hours ago
-              <span class="badge badge-default badge-pill">{{ latestFeeding.side }}</span>
-            </small>
+            <timecount :startTime="latestFeeding.date" :auto-update="1" :precision="2"></timecount>
+            ago
+            <small class="badge badge-default badge-pill">{{ latestFeeding.side }}</small>
           </h1>
         </div>
       </div>
