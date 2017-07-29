@@ -1,6 +1,6 @@
 <template>
-  <ul>
-    <li v-for="item in filteredItems">
+  <ul class="list-group">
+    <li class="list-group-item" v-for="item in filteredItems">
       {{ item.side }} => {{ item.date }} ( {{ item.duration }}s)
     </li>
     <span v-if="filteredItems.length < items.length">More ... </span>
@@ -9,7 +9,6 @@
 
 <script>
 export default {
-  name: 'feedlist',
   props: ['items'],
   computed: {
     filteredItems: function() {

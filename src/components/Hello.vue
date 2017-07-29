@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <feedlist :items="feedItems" />
+  <div>
+    <a href="/history">History</a>
     <template v-if="isStarted">
       <div class="container">
         <div class="row">
@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import feedlist from '@/components/feedlist'
 import timecount from '@/components/TimeCount'
 import two_digits from '../filters/two_digits'
 
@@ -79,7 +78,6 @@ export default {
     },
   },
   components: {
-    feedlist,
     timecount,
   },
   filters: {
