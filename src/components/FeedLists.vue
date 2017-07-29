@@ -9,7 +9,14 @@
 
 <script>
 export default {
-  props: ['items'],
+  props: {
+    items: {
+      type: Array,
+      default: function() {
+        return []
+      },
+    },
+  },
   computed: {
     filteredItems: function() {
       return this.items.slice(0, 4);
