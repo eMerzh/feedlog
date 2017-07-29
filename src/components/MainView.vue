@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a href="/history">History</a>
+    <router-link to="/history">History</router-link>
     <template v-if="isStarted">
       <div class="container">
         <div class="row">
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import store from '@/store';
 import timecount from '@/components/TimeCount'
 import two_digits from '../filters/two_digits'
 
@@ -48,10 +49,7 @@ export default {
       isStarted: false,
       startedTime: null,
       selectedSide: 'left',
-      feedItems: [
-        {date: Math.trunc((new Date()).getTime() / 1000)- 60*60*6 - 64, side: 'left'},
-        {date: Math.trunc((new Date()).getTime() / 1000) - 60*60*2 - 64, side: 'left'},
-      ],
+      sharedState: store.state,
     }
   },
   methods: {
@@ -67,14 +65,14 @@ export default {
 
     stop: function() {
       this.isStarted = false;
-      this.feedItems.push(
+      store.addFeedItem(
         {date: this.startedTime, side:this.selectedSide, duration: this.getNow() - this.startedTime}
       );
     },
   },
   computed: {
     latestFeeding: function() {
-      return this.feedItems[this.feedItems.length - 1];
+      return this.sharedState.feedItems[this.sharedState.feedItems.length - 1];
     },
   },
   components: {

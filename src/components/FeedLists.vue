@@ -1,26 +1,32 @@
 <template>
-  <ul class="list-group">
-    <li class="list-group-item" v-for="item in filteredItems">
-      {{ item.side }} => {{ item.date }} ( {{ item.duration }}s)
-    </li>
-    <span v-if="filteredItems.length < items.length">More ... </span>
-  </ul>
+  <div>
+    <router-link to="/">Back to main</router-link>
+
+    <ul class="list-group">
+      <li class="list-group-item" v-for="item in filteredItems">
+        {{ item.side }} => {{ item.date }} ( {{ item.duration }}s)
+      </li>
+      <span v-if="filteredItems.length < feedItemsLength">More ... </span>
+    </ul>
+  </div>
 </template>
 
 <script>
+import store from '@/store';
+
 export default {
-  props: {
-    items: {
-      type: Array,
-      default: function() {
-        return []
-      },
-    },
+  data () {
+    return {
+      sharedState: store.state,
+    };
   },
   computed: {
     filteredItems: function() {
-      return this.items.slice(0, 4);
-    }
+      return this.sharedState.feedItems.slice(0, 4);
+    },
+    feedItemsLength: function() {
+      return this.sharedState.feedItems.length;
+    },
   }
 }
 </script>
