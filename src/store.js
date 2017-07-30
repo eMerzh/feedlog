@@ -3,15 +3,14 @@ import localForage from "localforage";
 export default {
   debug: true,
   state: {
-    feedItems: [
-      {date: Math.trunc((new Date()).getTime() / 1000)- 60*60*6 - 64, side: 'left'},
-      {date: Math.trunc((new Date()).getTime() / 1000) - 60*60*2 - 64, side: 'left'},
-    ],
+    loaded: false,
+    feedItems: [],
   },
   initLoad() {
     localForage
       .getItem('feedItems')
       .then((value) => {
+        this.state.loaded = true;
         this.state.feedItems = value || [];
       });
   },

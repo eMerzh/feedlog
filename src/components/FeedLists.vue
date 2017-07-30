@@ -1,13 +1,25 @@
 <template>
-  <div>
+  <div class="container">
     <router-link to="/">Back to main</router-link>
 
-    <ul class="list-group">
-      <li class="list-group-item" v-for="item in filteredItems">
-        {{ item.side }} => {{ item.date }} ( {{ item.duration }}s)
-      </li>
+    <table class="table">
+      <tr v-for="item in filteredItems">
+        <td>
+        <span class="badge badge-default">
+          {{ item.side }}
+        </span>
+        </td>
+        <td>
+          {{ formatDate(item.date) }}
+        </td>
+        <td>
+          <span class="text-mutated">
+            {{ item.duration }}s
+          </span>
+        </td>
+      </tr>
       <span v-if="filteredItems.length < feedItemsLength">More ... </span>
-    </ul>
+    </table>
   </div>
 </template>
 
@@ -19,6 +31,17 @@ export default {
     return {
       sharedState: store.state,
     };
+  },
+  methods: {
+    formatDate(epoch) {
+      var date = new Date(0); // The 0 there is the key, which sets the date to the epoch
+      date.setUTCSeconds(epoch);
+      var options = {
+          year: "numeric", month: "numeric",
+          day: "numeric", hour: "2-digit", minute: "2-digit"
+      };
+    return date.toLocaleTimeString("en-GB", options);
+    },
   },
   computed: {
     filteredItems: function() {
