@@ -18,5 +18,9 @@ export default {
   addFeedItem(item) {
     this.state.feedItems.push(item);
     this.commit();
+  },
+  removeFeedRow(index) {
+    this.state.feedItems.splice(index, 1);
+    this.commit();
   }
 };

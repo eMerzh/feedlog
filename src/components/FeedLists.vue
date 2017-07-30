@@ -3,7 +3,7 @@
     <router-link to="/">Back to main</router-link>
 
     <table class="table">
-      <tr v-for="item in filteredItems">
+      <tr v-for="(item, index) in filteredItems">
         <td>
           <span class="badge badge-default">
             {{ item.side }}
@@ -17,7 +17,13 @@
             {{ item.duration }}s
           </span>
         </td>
+        <td>
+          <button class="btn btn-outline-danger" v-on:click="removeRow(index, item)">
+            🗑
+          </button>
+        </td>
       </tr>
+      <!-- TODO: dummy Page -->
       <span v-if="filteredItems.length < feedItemsLength">More ... </span>
     </table>
   </div>
@@ -42,6 +48,9 @@ export default {
       };
       return date.toLocaleTimeString("en-GB", options);
     },
+    removeRow: function (index, item) {
+      store.removeFeedRow(index);
+    }
   },
   computed: {
     filteredItems: function () {
