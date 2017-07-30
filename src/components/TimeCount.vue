@@ -1,5 +1,6 @@
 <template>
-  <span>{{ humanizeDuration }}</span>
+  <span>
+    {{ humanizeDuration }}</span>
 </template>
 
 <script>
@@ -10,40 +11,40 @@
  * @param  {number} precision The number of time elements
  * @return {string}           The phrase describing the the amount of time
  */
-function forHumans ( seconds, precision) {
-    var levels = [
-        [Math.floor(seconds / 31536000), 'years'],
-        [Math.floor((seconds % 31536000) / 86400), 'days'],
-        [Math.floor(((seconds % 31536000) % 86400) / 3600), 'hours'],
-        [Math.floor((((seconds % 31536000) % 86400) % 3600) / 60), 'minutes'],
-        [(((seconds % 31536000) % 86400) % 3600) % 60, 'seconds'],
-    ];
-    var result = [];
+function forHumans(seconds, precision) {
+  var levels = [
+    [Math.floor(seconds / 31536000), 'years'],
+    [Math.floor((seconds % 31536000) / 86400), 'days'],
+    [Math.floor(((seconds % 31536000) % 86400) / 3600), 'hours'],
+    [Math.floor((((seconds % 31536000) % 86400) % 3600) / 60), 'minutes'],
+    [(((seconds % 31536000) % 86400) % 3600) % 60, 'seconds'],
+  ];
+  var result = [];
 
-    for (var i = 0, max = levels.length; i < max; i++) {
-      var value = levels[i][0];
-      if ( value === 0 ) continue;
+  for (var i = 0, max = levels.length; i < max; i++) {
+    var value = levels[i][0];
+    if (value === 0) continue;
 
-      // take unit from array and remove plural form if value is 1
-      var unit = (value === 1 ? levels[i][1].substr(0, levels[i][1].length-1): levels[i][1]);
-      result.push(` ${value} ${unit}`);
-    };
-    if(precision) {
-      result = result.slice(0, precision);
-    }
-    return result.join(' ');
+    // take unit from array and remove plural form if value is 1
+    var unit = (value === 1 ? levels[i][1].substr(0, levels[i][1].length - 1) : levels[i][1]);
+    result.push(` ${value} ${unit}`);
+  };
+  if (precision) {
+    result = result.slice(0, precision);
+  }
+  return result.join(' ');
 }
 
 export default {
   name: 'timecount',
   methods: {
-    getNow: function() {
+    getNow: function () {
       return Math.trunc((new Date()).getTime() / 1000);
     },
-    updateNow: function() {
+    updateNow: function () {
       this.now = this.getNow();
     },
-    update: function() {
+    update: function () {
       const period = this.autoUpdate * 1000
       this.interval = window.setInterval(() => {
         this.updateNow();
@@ -54,7 +55,7 @@ export default {
       this.interval = null;
     }
   },
-  data: function() {
+  data: function () {
     return {
       now: Math.trunc((new Date()).getTime() / 1000),
     };
@@ -64,13 +65,13 @@ export default {
       return forHumans(this.now - this.startTime, this.precision);
     }
   },
-  mounted: function() {
+  mounted: function () {
     if (this.autoUpdate) {
       this.update();
     }
   },
-  beforeDestroy: function() {
-   this.stopUpdate();
+  beforeDestroy: function () {
+    this.stopUpdate();
   },
   props: {
     startTime: {
@@ -81,7 +82,7 @@ export default {
       type: Number,
       default: 1,
     },
-    precision:  {
+    precision: {
       type: Number,
       default: 3,
     },

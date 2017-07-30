@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import MainView from '@/components/MainView'
-import FeedLists from '@/components/FeedLists'
+import Vue from "vue";
+import Router from "vue-router";
+import MainView from "@/components/MainView";
+import FeedLists from "@/components/FeedLists";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'MainView',
+      path: "/",
+      name: "MainView",
       component: MainView
     },
     {
-      path: '/history',
-      name: 'FeedList',
+      path: "/history",
+      name: "FeedList",
       component: FeedLists
-    },
+    }
   ]
-})
+});

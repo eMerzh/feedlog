@@ -5,9 +5,9 @@
     <table class="table">
       <tr v-for="item in filteredItems">
         <td>
-        <span class="badge badge-default">
-          {{ item.side }}
-        </span>
+          <span class="badge badge-default">
+            {{ item.side }}
+          </span>
         </td>
         <td>
           {{ formatDate(item.date) }}
@@ -27,7 +27,7 @@
 import store from '@/store';
 
 export default {
-  data () {
+  data() {
     return {
       sharedState: store.state,
     };
@@ -37,17 +37,17 @@ export default {
       var date = new Date(0); // The 0 there is the key, which sets the date to the epoch
       date.setUTCSeconds(epoch);
       var options = {
-          year: "numeric", month: "numeric",
-          day: "numeric", hour: "2-digit", minute: "2-digit"
+        year: "numeric", month: "numeric",
+        day: "numeric", hour: "2-digit", minute: "2-digit"
       };
-    return date.toLocaleTimeString("en-GB", options);
+      return date.toLocaleTimeString("en-GB", options);
     },
   },
   computed: {
-    filteredItems: function() {
+    filteredItems: function () {
       return this.sharedState.feedItems.slice(0, 4);
     },
-    feedItemsLength: function() {
+    feedItemsLength: function () {
       return this.sharedState.feedItems.length;
     },
   }

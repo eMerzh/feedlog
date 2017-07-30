@@ -47,7 +47,7 @@ import timecount from '@/components/TimeCount'
 import two_digits from '../filters/two_digits'
 
 export default {
-  data () {
+  data() {
     return {
       isStarted: false,
       startedTime: null,
@@ -56,25 +56,25 @@ export default {
     }
   },
   methods: {
-    getNow: function() {
+    getNow: function () {
       return Math.trunc((new Date()).getTime() / 1000);
     },
 
-    start: function(side) {
+    start: function (side) {
       this.isStarted = true;
       this.selectedSide = side;
       this.startedTime = this.getNow();
     },
 
-    stop: function() {
+    stop: function () {
       this.isStarted = false;
       store.addFeedItem(
-        {date: this.startedTime, side:this.selectedSide, duration: this.getNow() - this.startedTime}
+        { date: this.startedTime, side: this.selectedSide, duration: this.getNow() - this.startedTime }
       );
     },
   },
   computed: {
-    latestFeeding: function() {
+    latestFeeding: function () {
       return this.sharedState.feedItems[this.sharedState.feedItems.length - 1];
     },
   },
