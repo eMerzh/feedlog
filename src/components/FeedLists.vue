@@ -31,6 +31,7 @@
 
 <script>
 import store from '@/store';
+import { orderBy, slice } from 'lodash';
 
 export default {
   data() {
@@ -54,7 +55,10 @@ export default {
   },
   computed: {
     filteredItems: function () {
-      return this.sharedState.feedItems.slice(0, 4);
+      return slice(
+        orderBy(this.sharedState.feedItems, ['date'], ['desc']),
+        0, 2
+      );
     },
     feedItemsLength: function () {
       return this.sharedState.feedItems.length;
