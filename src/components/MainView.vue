@@ -49,9 +49,6 @@ import two_digits from '../filters/two_digits'
 export default {
   data() {
     return {
-      isStarted: false,
-      startedTime: null,
-      selectedSide: 'left',
       sharedState: store.state,
     }
   },
@@ -61,21 +58,29 @@ export default {
     },
 
     start: function (side) {
-      this.isStarted = true;
-      this.selectedSide = side;
-      this.startedTime = this.getNow();
+      store.startFeeding(side, this.getNow());
     },
 
     stop: function () {
-      this.isStarted = false;
-      store.addFeedItem(
-        { date: this.startedTime, side: this.selectedSide, duration: this.getNow() - this.startedTime }
-      );
+      store.stopFeeding(this.getNow() - this.startedTime);
     },
   },
   computed: {
-    latestFeeding: function () {
+    latestFeeding() {
       return this.sharedState.feedItems[this.sharedState.feedItems.length - 1];
+    },
+    isStarted() {
+      return this.latestFeeding && this.latestFeeding.isRunning;
+    },
+    startedTime() {
+      if (this.isStarted) {
+        return this.latestFeeding.date;
+      }
+    },
+    selectedSide() {
+      if (this.isStarted) {
+        return this.latestFeeding.side;
+      }
     },
   },
   components: {

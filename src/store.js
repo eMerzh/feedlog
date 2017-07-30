@@ -4,6 +4,7 @@ export default {
   debug: true,
   state: {
     loaded: false,
+    currentFeeding: undefined,
     feedItems: []
   },
   initLoad() {
@@ -14,6 +15,19 @@ export default {
   },
   commit() {
     return localForage.setItem("feedItems", this.state.feedItems);
+  },
+  startFeeding(side, startedTime) {
+    this.addFeedItem({
+      date: startedTime,
+      side: side,
+      duration: 0,
+      isRunning: true
+    });
+  },
+  stopFeeding(duration) {
+    this.state.feedItems[this.state.feedItems.length - 1].duration = duration;
+    this.state.feedItems[this.state.feedItems.length - 1].isRunning = false;
+    this.commit();
   },
   addFeedItem(item) {
     this.state.feedItems.push(item);

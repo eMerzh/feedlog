@@ -3,7 +3,7 @@
     <router-link to="/">Back to main</router-link>
 
     <table class="table">
-      <tr v-for="(item, index) in filteredItems">
+      <tr v-for="(item, index) in filteredItems" v-bind:class="{'table-active': item.isRunning}">
         <td>
           <span class="badge badge-default">
             {{ item.side }}
