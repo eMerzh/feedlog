@@ -5,6 +5,11 @@
 </template>
 
 <script>
+import store from '@/store';
+
+// Restore store from localStorage
+store.initLoad();
+
 export default {
   name: 'app'
 }

@@ -25,13 +25,16 @@
             <button class="btn btn-outline-primary btn-block" @click="start('right')">Right</button>
           </div>
         </div>
-        <div class="jumbotron">
+        <div class="jumbotron" v-if="latestFeeding">
           <p class="lead">Last feeding</p>
           <h1 class="display-3">
             <timecount :startTime="latestFeeding.date" :auto-update="1" :precision="2"></timecount>
             ago
             <small class="badge badge-default badge-pill">{{ latestFeeding.side }}</small>
           </h1>
+        </div>
+        <div v-else>
+          No Feeding registered yet
         </div>
       </div>
     </template>
