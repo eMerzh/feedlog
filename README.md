@@ -42,3 +42,7 @@ and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 - [ ] Add nice Chart like [....||...|...||||]
 - [ ] Both Sides?
 - [ ] Add time between feeding in history
+- [ ] display feeding time as minutes /...
+- [ ] Make date formating always the same
+- [ ] limit card of days number (more button or infint scroll)
+
