@@ -1,6 +1,8 @@
 # vuebaby
 
-> A Vue.js project
+> A Baby Feeding logger.
+
+Note every feeding time and side.
 
 ## Build Setup
 
@@ -27,4 +29,16 @@ npm run e2e
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/)
+and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Todo Idea
+
+- [ ] Auto stop feeding if time is larger than 1h ? (set to average feedings)
+- [ ] Group History by date (with day count)
+- [ ] Allow edit date and time
+- [ ] Add Bottle feeding (in ML)
+- [ ] Add setup (Name, Birth , ...)
+- [ ] Add nice Chart like [....||...|...||||]
+- [ ] Both Sides?
+- [ ] Add time between feeding in history
