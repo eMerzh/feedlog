@@ -24,7 +24,9 @@
         </td>
       </tr>
       <!-- TODO: dummy Page -->
-      <span v-if="filteredItems.length < feedItemsLength">More ... </span>
+      <button class="btn btn-default" v-if="filteredItems.length < totalFeedItemsLength" @click="showMore">
+        More ...
+      </button>
     </table>
   </div>
 </template>
@@ -36,6 +38,7 @@ import { orderBy, slice } from 'lodash';
 export default {
   data() {
     return {
+      feedItemsLength: 10,
       sharedState: store.state,
     };
   },
@@ -51,16 +54,19 @@ export default {
     },
     removeRow: function (index, item) {
       store.removeFeedRow(index);
+    },
+    showMore() {
+      this.feedItemsLength = this.feedItemsLength + 10;
     }
   },
   computed: {
     filteredItems: function () {
       return slice(
         orderBy(this.sharedState.feedItems, ['date'], ['desc']),
-        0, 2
+        0, this.feedItemsLength
       );
     },
-    feedItemsLength: function () {
+    totalFeedItemsLength: function () {
       return this.sharedState.feedItems.length;
     },
   }
