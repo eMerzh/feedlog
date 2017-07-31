@@ -62,7 +62,11 @@ export default {
   },
   computed: {
     humanizeDuration: function () {
-      return forHumans(this.now - this.startTime, this.precision);
+      if (this.endTime) {
+        return forHumans(this.endTime - this.startTime, this.precision);
+      } else {
+        return forHumans(this.now - this.startTime, this.precision);
+      }
     }
   },
   mounted: function () {
@@ -75,6 +79,10 @@ export default {
   },
   props: {
     startTime: {
+      type: Number,
+      coerce: str => Math.trunc(Date.parse(str) / 1000)
+    },
+    endTime: {
       type: Number,
       coerce: str => Math.trunc(Date.parse(str) / 1000)
     },

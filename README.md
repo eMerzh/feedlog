@@ -34,15 +34,16 @@ and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Todo Idea
 
+- [ ] Add time between feeding in history
+- [ ] Make date formating always the same
+- [ ] Fix refresh and format of Past Feeding
+- [ ] limit card of days number (more button or infint scroll)
 - [ ] Auto stop feeding if time is larger than 1h ? (set to average feedings)
-- [ ] Group History by date (with day count)
 - [ ] Allow edit date and time
 - [ ] Add Bottle feeding (in ML)
 - [ ] Add setup (Name, Birth , ...)
 - [ ] Add nice Chart like [....||...|...||||]
 - [ ] Both Sides?
-- [ ] Add time between feeding in history
 - [ ] display feeding time as minutes /...
-- [ ] Make date formating always the same
-- [ ] limit card of days number (more button or infint scroll)
+- [x] Group History by date (with day count)
 
