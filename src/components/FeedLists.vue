@@ -21,6 +21,10 @@
             </td>
             <td>
               {{ formatDate(item.date) }}
+              <div class="small text-muted" v-if="item.previousDate">
+                after
+                <timecount :startTime="item.previousDate" :endTime="item.date" :autoUpdate="0"></timecount>
+              </div>
             </td>
             <td>
               <span class="text-mutated">
@@ -41,7 +45,9 @@
 
 <script>
 import store from '@/store';
-import { groupBy, orderBy, slice } from 'lodash';
+import timecount from '@/components/TimeCount'
+
+import { forEachRight, groupBy, orderBy, slice } from 'lodash';
 
 /**
  * Return a date object from an epoch
@@ -57,6 +63,9 @@ function getDateFromEpoch(epoch) {
 
 
 export default {
+  components: {
+    timecount,
+  },
   data() {
     return {
       sharedState: store.state,
@@ -78,8 +87,15 @@ export default {
 
   computed: {
     DaysItems: function () {
+      var prevDate = null;
       return groupBy(
-        orderBy(this.sharedState.feedItems, ['date'], ['desc']),
+        forEachRight(
+          orderBy(this.sharedState.feedItems, ['date'], ['desc']),
+          (e) => {
+            e.previousDate = prevDate;
+            prevDate = e.date;
+          }
+        ),
         // Hack to get the date as YYYY-MM-DD
         (i) => getDateFromEpoch(i.date).toISOString().split('T')[0]
       );
