@@ -32,7 +32,7 @@
               </span>
             </td>
             <td>
-              <button class="btn btn-outline-danger" v-on:click="removeRow(index, item)">
+              <button class="btn btn-outline-danger" v-on:click="removeRow(item)">
                 🗑
               </button>
             </td>
@@ -48,7 +48,7 @@ import store from '@/store';
 import timecount from '@/components/TimeCount'
 import { getDateFromEpoch } from '@/utils'
 
-import { forEachRight, groupBy, orderBy, slice } from 'lodash';
+import { findIndex, forEachRight, groupBy, orderBy, slice } from 'lodash';
 
 
 export default {
@@ -73,8 +73,10 @@ export default {
       // Hack to get the date as YYYY-MM-DD
       return this.formatDateTime(epoch).split(',')[0]
     },
-    removeRow: function (index, item) {
-      store.removeFeedRow(index);
+    removeRow: function (item) {
+      store.removeFeedRow(
+        findIndex(this.sharedState.feedItems, { 'date': item.date })
+      );
     },
   },
 
