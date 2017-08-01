@@ -2,7 +2,7 @@
   <div>
     <router-link to="/history">History</router-link>
     <template v-if="isStarted">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <button class="btn btn-danger btn-lg btn-block" @click="stop()">Stop</button>
         </div>
@@ -16,7 +16,7 @@
       </div>
     </template>
     <template v-else>
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col">
             <button class="btn btn-outline-primary btn-block" @click="start('left')">Left</button>

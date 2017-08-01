@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <router-link to="/">Back to main</router-link>
     <div class="card mb-3" v-for="(filteredItems, groupedDate) in DaysItems">
       <div class="card-block">

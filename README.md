@@ -34,7 +34,6 @@ and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Todo
 
-- [ ] Fix counter start
 - [ ] limit card of days number (more button or infinite scroll)
 
 ## Ideas
