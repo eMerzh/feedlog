@@ -44,7 +44,6 @@
 <script>
 import store from '@/store';
 import timecount from '@/components/TimeCount'
-import two_digits from '../filters/two_digits'
 
 export default {
   data() {
@@ -85,9 +84,6 @@ export default {
   },
   components: {
     timecount,
-  },
-  filters: {
-    two_digits,
   }
 }
 </script>

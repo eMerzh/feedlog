@@ -46,20 +46,9 @@
 <script>
 import store from '@/store';
 import timecount from '@/components/TimeCount'
+import { getDateFromEpoch } from '@/utils'
 
 import { forEachRight, groupBy, orderBy, slice } from 'lodash';
-
-/**
- * Return a date object from an epoch
- * @param  {number} epoch the number of seconds from 1970
- * @return  {Date} a Date object
- */
-function getDateFromEpoch(epoch) {
-  var date = new Date(0); // The 0 there is the key, which sets the date to the epoch
-  date.setUTCSeconds(epoch);
-
-  return date;
-}
 
 
 export default {
