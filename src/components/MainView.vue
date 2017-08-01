@@ -57,6 +57,7 @@ export default {
     },
 
     start: function (side) {
+      console.log('start', this.getNow());
       store.startFeeding(side, this.getNow());
     },
 

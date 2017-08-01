@@ -34,7 +34,6 @@ and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Todo
 
-- [ ] Fix refresh and format of Past Feeding
 - [ ] Fix counter start
 - [ ] limit card of days number (more button or infinite scroll)
 

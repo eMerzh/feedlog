@@ -15,9 +15,16 @@ export function getDateFromEpoch(epoch) {
  *
  * @param  {number} seconds   The number of seconds to be processed
  * @param  {number} precision The number of time elements
+ * @param  {number} nowLimit  The limit of second below witch the function will display "now"
  * @return {string}           The phrase describing the the amount of time
  */
-export function forHumans(seconds, precision) {
+export function forHumans(seconds, precision, nowLimit) {
+  if (nowLimit == undefined) {
+    nowLimit = 0;
+  }
+  if (seconds < nowLimit) {
+    return "Just now";
+  }
   var levels = [
     [Math.floor(seconds / 31536000), "years"],
     [Math.floor(seconds % 31536000 / 86400), "days"],
