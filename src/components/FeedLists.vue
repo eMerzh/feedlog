@@ -28,7 +28,7 @@
             </td>
             <td>
               <span class="text-mutated">
-                {{ item.duration }}s
+                <timecount :startTime="item.date" :endTime="item.date + item.duration" :autoUpdate="0" :precision="1"></timecount>
               </span>
             </td>
             <td>

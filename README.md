@@ -1,4 +1,4 @@
-# vuebaby
+# VueBaby
 
 > A Baby Feeding logger.
 
@@ -32,12 +32,14 @@ npm test
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/)
 and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## Todo Idea
+## Todo
 
-- [ ] Add time between feeding in history
-- [ ] Make date formating always the same
+- [ ] Make date formating consistent
 - [ ] Fix refresh and format of Past Feeding
-- [ ] limit card of days number (more button or infint scroll)
+- [ ] limit card of days number (more button or infinite scroll)
+
+## Ideas
+
 - [ ] Auto stop feeding if time is larger than 1h ? (set to average feedings)
 - [ ] Allow edit date and time
 - [ ] Add Bottle feeding (in ML)
@@ -46,4 +48,4 @@ and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 - [ ] Both Sides?
 - [ ] display feeding time as minutes /...
 - [x] Group History by date (with day count)
-
+- [ ] time before next feeding?
