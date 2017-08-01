@@ -20,7 +20,7 @@
               </span>
             </td>
             <td>
-              {{ formatDate(item.date) }}
+              {{ formatDateTime(item.date) }}
               <div class="small text-muted" v-if="item.previousDate">
                 after
                 <timecount :startTime="item.previousDate" :endTime="item.date" :autoUpdate="0"></timecount>
@@ -58,16 +58,20 @@ export default {
   data() {
     return {
       sharedState: store.state,
+      dateFormatOptions: {
+        year: "numeric", month: "numeric",
+        day: "numeric", hour: "2-digit", minute: "2-digit"
+      }
     };
   },
   methods: {
-    formatDate(epoch) {
+    formatDateTime(epoch) {
       var date = getDateFromEpoch(epoch);
-      var options = {
-        year: "numeric", month: "numeric",
-        day: "numeric", hour: "2-digit", minute: "2-digit"
-      };
-      return date.toLocaleTimeString("en-GB", options);
+      return date.toLocaleTimeString("en-GB", this.dateFormatOptions);
+    },
+    formatDate(epoch) {
+      // Hack to get the date as YYYY-MM-DD
+      return this.formatDateTime(epoch).split(',')[0]
     },
     removeRow: function (index, item) {
       store.removeFeedRow(index);
@@ -85,8 +89,7 @@ export default {
             prevDate = e.date;
           }
         ),
-        // Hack to get the date as YYYY-MM-DD
-        (i) => getDateFromEpoch(i.date).toISOString().split('T')[0]
+        (i) => this.formatDate(i.date)
       );
     },
     totalFeedItemsLength: function () {
