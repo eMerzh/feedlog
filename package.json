@@ -1,8 +1,8 @@
 {
   "name": "vuebaby",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "Brice Maron <brice@page-karma.com>",
+  "description": "A Baby feeding logging project",
+  "author": "Brice Maron <brice@bmaron.net>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -89,9 +89,5 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
 }

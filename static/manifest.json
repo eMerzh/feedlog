@@ -1,0 +1,30 @@
+{
+  "name": "FeedLog",
+  "lang": "en-GB",
+  "short_name": "FeedLog",
+  "start_url": "./?utm_source=web_app_manifest",
+  "display": "standalone",
+  "theme_color": "#eceeef",
+  "icons": [
+    {
+      "src": "logo-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.svg",
+      "sizes": "200x200",
+      "density": 2
+    }
+  ]
+}
