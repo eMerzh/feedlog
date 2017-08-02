@@ -2,7 +2,7 @@
   "name": "FeedLog",
   "lang": "en-GB",
   "short_name": "FeedLog",
-  "start_url": "./?utm_source=web_app_manifest",
+  "start_url": "/index.html",
   "display": "standalone",
   "theme_color": "#eceeef",
   "icons": [
