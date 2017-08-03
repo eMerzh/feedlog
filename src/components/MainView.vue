@@ -4,17 +4,17 @@
     <template v-if="isStarted">
       <div class="container-fluid">
         <div class="row">
-          <button class="btn btn-danger btn-lg btn-block" @click="stop()">Stop</button>
-        </div>
-        <div class="row">
-          <div class="jumbotron">
-            <p class="lead">Started since :</p>
-            <h1 class="display-4">
-              <timecount :startTime="startedTime"></timecount>
-              <br />
-              <small class="badge badge-primary badge-pill">{{ selectedSide }}</small>
-            </h1>
+          <div class="col-12">
+            <button class="btn btn-danger btn-lg btn-block" @click="stop()">Stop</button>
           </div>
+        </div>
+        <div class="jumbotron">
+          <p class="lead">Started since :</p>
+          <h1 class="display-4">
+            <timecount :startTime="startedTime"></timecount>
+            <br />
+            <small class="badge badge-primary badge-pill">{{ selectedSide }}</small>
+          </h1>
         </div>
       </div>
     </template>

@@ -67,7 +67,7 @@ export default {
     },
     nowLimit: {
       type: Number,
-      default: 10,
+      default: 3,
     },
     length: {
       type: Number,
