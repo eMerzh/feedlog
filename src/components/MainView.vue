@@ -1,17 +1,20 @@
 <template>
   <div>
-    <router-link to="/history">History</router-link>
+    <router-link class="router-link" to="/history">History</router-link>
     <template v-if="isStarted">
       <div class="container-fluid">
         <div class="row">
           <button class="btn btn-danger btn-lg btn-block" @click="stop()">Stop</button>
         </div>
-        <div class="jumbotron">
-          <p class="lead">Started since :</p>
-          <h1 class="display-3">
-            <timecount :startTime="startedTime"></timecount>
-            <small class="badge badge-primary badge-pill">{{ selectedSide }}</small>
-          </h1>
+        <div class="row">
+          <div class="jumbotron">
+            <p class="lead">Started since :</p>
+            <h1 class="display-4">
+              <timecount :startTime="startedTime"></timecount>
+              <br />
+              <small class="badge badge-primary badge-pill">{{ selectedSide }}</small>
+            </h1>
+          </div>
         </div>
       </div>
     </template>
@@ -87,3 +90,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.router-link {
+  margin-bottom: 20px;
+  display: block;
+}
+</style>
