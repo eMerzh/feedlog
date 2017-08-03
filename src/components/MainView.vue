@@ -27,8 +27,8 @@
         </div>
         <div class="jumbotron" v-if="latestFeeding">
           <p class="lead">Last feeding</p>
-          <h1 class="display-3">
-            <timecount :startTime="latestFeeding.date" :auto-update="1" :precision="2"></timecount>
+          <h1 class="display-5">
+            <timecount :startTime="latestFeeding.date" :auto-update="1" :precision="2" :length="2"></timecount>
             ago
             <small class="badge badge-default badge-pill">{{ latestFeeding.side }}</small>
           </h1>
@@ -57,7 +57,6 @@ export default {
     },
 
     start: function (side) {
-      console.log('start', this.getNow());
       store.startFeeding(side, this.getNow());
     },
 

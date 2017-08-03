@@ -34,9 +34,9 @@ export default {
   computed: {
     humanizeDuration: function () {
       if (this.endTime) {
-        return forHumans(this.endTime - this.startTime, this.precision, 0);
+        return forHumans(this.endTime - this.startTime, this.precision, 0, this.length);
       } else {
-        return forHumans(this.now - this.startTime, this.precision, this.nowLimit);
+        return forHumans(this.now - this.startTime, this.precision, this.nowLimit, this.length);
       }
     }
   },
@@ -68,6 +68,10 @@ export default {
     nowLimit: {
       type: Number,
       default: 10,
+    },
+    length: {
+      type: Number,
+      default: 1,
     },
   },
   watch: {
