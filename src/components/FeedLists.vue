@@ -47,7 +47,11 @@ import store from '@/store';
 import timecount from '@/components/TimeCount'
 import { getDateFromEpoch } from '@/utils'
 
-import { findIndex, forEachRight, groupBy, orderBy, slice } from 'lodash';
+import findIndex from 'lodash/findIndex';
+import forEachRight from 'lodash/forEachRight';
+import groupBy from 'lodash/groupBy';
+import orderBy from 'lodash/orderBy';
+import slice from 'lodash/slice';
 
 
 export default {
