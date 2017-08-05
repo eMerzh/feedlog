@@ -36,5 +36,15 @@ export default {
   removeFeedRow(index) {
     this.state.feedItems.splice(index, 1);
     this.commit();
+  },
+  clearHistory() {
+    this.state.feedItems = [];
+    this.commit();
+  },
+  sort() {
+    this.state.feedItems.sort(function(a, b) {
+      return a.date - b.date;
+    });
+    this.commit();
   }
 };
