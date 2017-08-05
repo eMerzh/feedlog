@@ -1,5 +1,6 @@
 <template>
   <div>
+    <filereader @onLoad="parseFile" />
     <router-link class="router-link" to="/history">History</router-link>
     <template v-if="isStarted">
       <div class="container-fluid">
@@ -32,7 +33,6 @@
           <p class="lead">Last feeding</p>
           <h1 class="display-5">
             <timecount :startTime="latestFeeding.date" :auto-update="1" :precision="2" :length="2"></timecount>
-            ago
             <small class="badge badge-default badge-pill">{{ latestFeeding.side }}</small>
           </h1>
         </div>
@@ -47,6 +47,7 @@
 <script>
 import store from '@/store';
 import timecount from '@/components/TimeCount'
+import filereader from '@/components/FileReader'
 
 export default {
   data() {
@@ -55,6 +56,65 @@ export default {
     }
   },
   methods: {
+    parseFile(content) {
+
+      this.loadImport(
+        this.prepContent(
+          this.parseContent(content)
+        )
+      )
+        ;
+    },
+    loadImport(rows) {
+      rows.sort(function (a, b) {
+        return a.date - b.date;
+      });
+      for (var i = 1; i < rows.length; i++) {
+        store.addFeedItem(rows[i]);
+      }
+    },
+    prepContent(rows) {
+      var objects = [];
+      for (var i = 1; i < rows.length; i++) {
+        var dateParts = rows[i]['Start Time'].split(/ |\/|:/);
+        var hour = parseInt(dateParts[3], 10);
+        if (dateParts[5] === 'PM') {
+          hour += 12;
+        }
+        var month = parseInt(dateParts[1], 10) - 1;
+        var date = new Date(dateParts[2], month, dateParts[0], hour, dateParts[4])
+        var durationParts = rows[i]['Duration'].split(/:/);
+        var duration = parseInt(durationParts[1], 10) + (parseInt(durationParts[0], 10) * 60);
+        var obj = {
+          date: date.getTime() / 1000, // "15/07/2017 11:08s AM"
+          side: rows[i]['Side'].toLowerCase(),
+          duration: duration, // "25:39"
+        };
+
+        objects.push(obj);
+      }
+
+      return objects;
+    },
+    parseContent(content) {
+      var contentLines = content.split(/\r\n|\n/);
+      // @TODO: make sure we have a content :)
+      var headers = contentLines[0].split(',');
+      var lines = [];
+      // start at 1, skip headers
+      for (var i = 1; i < contentLines.length; i++) {
+        var data = contentLines[i].split(',');
+        if (data.length == headers.length) {
+          var row = {};
+          for (var j = 0; j < headers.length; j++) {
+            row[headers[j]] = data[j];
+          }
+          lines.push(row);
+        }
+      }
+
+      return lines;
+    },
     getNow: function () {
       return Math.trunc((new Date()).getTime() / 1000);
     },
@@ -87,6 +147,7 @@ export default {
   },
   components: {
     timecount,
+    filereader,
   }
 }
 </script>
