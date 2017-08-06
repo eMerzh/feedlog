@@ -34,8 +34,6 @@ and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Todo
 
-- [ ] limit card of days number (more button or infinite scroll)
-
 ## Ideas
 
 - [ ] Package it.
@@ -45,6 +43,5 @@ and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 - [ ] Add setup (Name, Birth , ...)
 - [ ] Add nice Chart like [....||...|...||||]
 - [ ] Both Sides?
-- [ ] display feeding time as minutes /...
 - [ ] time before next feeding?
-- [ ] import / export
+- [ ] export

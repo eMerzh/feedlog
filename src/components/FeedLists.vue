@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="card mb-3" v-for="(filteredItems, groupedDate) in DaysItems">
+    <div class="card mb-3" v-for="(filteredItems, groupedDate) in DaysItemsLimited">
       <div class="card-block">
         <div class="row">
           <div class="col text-left">
@@ -38,6 +38,9 @@
         </table>
       </div>
     </div>
+    <button class="btn btn-default" @click="displayMore" v-if="originalDaysNumber >= daysToDisplay">
+      More
+    </button>
   </div>
 </template>
 
@@ -59,6 +62,7 @@ export default {
   },
   data() {
     return {
+      daysToDisplay: 3,
       sharedState: store.state,
       dateFormatOptions: {
         year: "numeric", month: "numeric",
@@ -84,6 +88,9 @@ export default {
         findIndex(this.sharedState.feedItems, { 'date': item.date })
       );
     },
+    displayMore() {
+      this.daysToDisplay += 3;
+    }
   },
 
   computed: {
@@ -99,6 +106,21 @@ export default {
         ),
         (i) => this.formatDate(i.date)
       );
+    },
+    originalDaysNumber() {
+      return Object.keys(this.DaysItems).length;
+    },
+    DaysItemsLimited() {
+      var allkeys = Object.keys(this.DaysItems);
+      var results = {};
+      allkeys.forEach((date) => {
+        if (Object.keys(results).length > this.daysToDisplay) {
+          return;
+        }
+        console.log('zz', date, this.DaysItems[date]);
+        results[date] = this.DaysItems[date];
+      });
+      return results;
     },
     totalFeedItemsLength: function () {
       return this.sharedState.feedItems.length;
