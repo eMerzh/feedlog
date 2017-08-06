@@ -1,8 +1,5 @@
 <template>
   <div>
-    <router-link class="btn btn-outline-default text-right" to="/settings">⚙</router-link>
-    <router-link class="router-link" to="/history">History</router-link>
-
     <template v-if="isStarted">
       <div class="container-fluid">
         <div class="row">
@@ -47,15 +44,19 @@
 
 <script>
 import store from '@/store';
-import timecount from '@/components/TimeCount'
+import timecount from '@/components/TimeCount';
 
 export default {
   data() {
     return {
       sharedState: store.state,
+      navBarShown: false,
     }
   },
   methods: {
+    toggleNavbar() {
+      this.navBarShown = !this.navBarShown;
+    },
     getNow: function () {
       return Math.trunc((new Date()).getTime() / 1000);
     },

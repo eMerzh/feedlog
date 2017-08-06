@@ -1,11 +1,12 @@
 <template>
   <div>
-    <router-link to="/">Back to Main View</router-link>
-
     <h2>
       Import from FeedLogger
     </h2>
-    <filereader @onLoad="parseFile" />
+    <label class="custom-file">
+      <filereader @onLoad="parseFile" class="custom-file-input" />
+      <span class="custom-file-control"></span>
+    </label>
 
     <h2>Clear History</h2>
     <button class="btn btn-outline-danger" @click="clearHistory">Clear</button>
@@ -81,3 +82,12 @@ export default {
   }
 }
 </script>
+<style scoped>
+h2 {
+  text-decoration: underline;
+  text-decoration-color: lightgray;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+</style>
+
