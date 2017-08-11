@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-toggleable-xl navbar-light bg-faded">
+  <nav class="navbar navbar-expand navbar-light bg-faded">
     <div class="container">
       <router-link active-class="active" class="navbar-brand" to="/">FeedLog</router-link>
       <div class="navbar-collapse collapse">
