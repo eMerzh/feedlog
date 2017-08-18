@@ -12,7 +12,7 @@
           <h1 class="display-4">
             <timecount :startTime="startedTime"></timecount>
             <br />
-            <small class="badge badge-primary badge-pill">{{ selectedSide }}</small>
+            <small class="badge badge-secondary badge-pill">{{ selectedSide }}</small>
           </h1>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <p class="lead">Last feeding</p>
           <h1 class="display-5">
             <timecount :startTime="latestFeeding.date" :auto-update="1" :precision="2" :length="2"></timecount>
-            <small class="badge badge-default badge-pill">{{ latestFeeding.side }}</small>
+            <small class="badge badge-secondary badge-pill">{{ latestFeeding.side }}</small>
           </h1>
         </div>
         <div v-else>

@@ -3,10 +3,10 @@
     <div class="card mb-3" v-for="(filteredItems, groupedDate) in DaysItemsLimited">
       <div class="card-block">
         <div class="row">
-          <div class="col text-left">
+          <div class="col text-left block-date">
             <span class="text-muted">{{ groupedDate }}</span>
           </div>
-          <div class="col text-right">
+          <div class="col text-right block-items-count">
             <small class="text-muted">{{ filteredItems.length }} items</small>
           </div>
         </div>
@@ -38,7 +38,7 @@
         </table>
       </div>
     </div>
-    <button class="btn btn-default" @click="displayMore" v-if="originalDaysNumber >= daysToDisplay">
+    <button class="btn btn-secondary" @click="displayMore" v-if="originalDaysNumber >= daysToDisplay">
       More
     </button>
   </div>
@@ -117,7 +117,6 @@ export default {
         if (Object.keys(results).length > this.daysToDisplay) {
           return;
         }
-        console.log('zz', date, this.DaysItems[date]);
         results[date] = this.DaysItems[date];
       });
       return results;
@@ -130,8 +129,15 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.router-link {
-  margin-bottom: 20px;
-  display: block;
+.block-date {
+  margin-left: 15px;
+}
+
+.block-items-count {
+  margin-right: 15px;
+}
+
+.table {
+  table-layout: fixed;
 }
 </style>
